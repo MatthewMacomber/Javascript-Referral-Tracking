@@ -2,7 +2,7 @@
 //YOUR VARIABLES - SET THESE!
 
 //this is the name of the cookie on the users machine
-var cookieName = "crypticteklabs",
+var cookieName = "agents",
 //the name of the url paramater you are expecting that holds the code you wish to capture
 //for example, http://www.test.com?couponCode=BIGDISCOUNT your URL Parameter would be couponCode and the
 //cookie value that will be stored is BIGDISCOUNT
