@@ -1,2 +1,67 @@
 Read about this code and get some examples for its use here:
 http://www.cypressnorth.com/blog/programming/capturing-referral-codes-affiliate-codes-or-gift-codes-with-javascript/
+------------------------------
+Backup of above informastion:
+------------------------------
+
+For most applications where transactions are taking place, there is a need for some type of discount capability, affiliate tracking, referral code tracking, or a combination of the three. The design of the code used to accomplish this can vary greatly based on the needs of the system, which is why there is generally no standard solution.
+
+In an effort to develop a common starting point to reach these goals I’ve developed a light JavaScript solution that is flexible enough for just about every scenario I need it for. The idea is to have the referral code or discount code be captured by the JavaScript and then store it as a cookie. Once you have the code stored in the cookie, you can consume it from a variety of back-end methods as nearly every modern language has a way to read from cookies.
+
+The file is written in plain JavaScript without any dependencies so that it can easily be added to any site using:
+
+<script src="cypressnorth.referralTracking.1.0.js" type="text/javascript"></script>
+
+Once the file is included, you can use one of the script’s methods of storing and retrieving the codes. There are 3 variables at the top of the file that you can set to provide default values for extracting codes from a URL, but there are also methods for triggering a code to be stored from an on-page action as well.
+
+It’s up to your program model for how you use the codes once they are stored but I will be writing a follow up post with some examples of its usage in different languages. In my usage, the cookie value will be read when a user is signing up for a service. If there is a cookie value present, the value will be referenced against the database to determine the action to take for that code, the code will be tied to the new account, and the appropriate discount will be applied.
+
+In our scenario, we have a landing page where a customer will navigate in order to receive some sort of incentive. When the landing page is loaded, a discount code related to the campaign is stored as a cookie using the SaveCode(‘Code’); method in our .js file. Now that the cookie has been stored, it can be retrieved later on when it comes time to process some type of transaction, in this case, signing up for a trial account for our service.
+
+After the customer visits the landing page where the discount is applied, they hopefully continue on to sign up for a trial account. In the back end of our application we have created a Discount table that stores various discount codes and their details that can be associated with an account’s subscription. When the customer creates this new subscription, the application checks to see if any discount codes have been applied by way of the cookie object we set previously. If no cookie is present, the customer is processed as a normal, non-discount subscriber. If a cookie is present, the code is referenced against the Discount table in the database to pull up the details of that discount and apply them.
+
+To cookie can be retrieved in 2 ways:
+
+Read the cookie back using client-side code (JavaScript, VBScript, etc.)
+Read the cookie back using server-side code (C#, PHP, Java, etc.)
+You can easily retrieve the cookie on the client side by calling the GetCode(); function in our JavaScript file, this will return the stored value as a string.
+
+Retrieving the cookie value on the server side depends on which language and how you are passing the value but the principal is generally the same. Here are a few examples of cookie retrieval:
+
+ASP.NET C#
+
+string discountCode = "";
+HttpCookie cookie = Request.Cookies["MyCookieName"];
+ 
+if (cookie != null)
+{
+    discountCode = cookie.Value;
+}
+
+
+PHP
+
+<?php
+$discountCode = "";
+if (isset($_COOKIE["MyCookieName"]))
+{
+  $discountCode = $_COOKIE["MyCookieName"];
+}
+?>
+
+
+Java
+
+Cookie[] cookies = request.getCookies();
+string discountCode = "";
+for(int loopIndex = 0; loopIndex < cookies.length; loopIndex++)
+{
+    Cookie cookie1 = cookies[loopIndex];
+    if (cookie1.getName().equals("MyCookieName"))
+    {
+        discountCode = cookie1.getValue();
+    }
+}
+
+
+Once you’ve got your discount code value, it’s up to your system requirements how you use it.
