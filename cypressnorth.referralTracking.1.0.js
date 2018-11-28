@@ -2,13 +2,13 @@
 //YOUR VARIABLES - SET THESE!
 
 //this is the name of the cookie on the users machine
-var cookieName = "MyCookieName",
+var cookieName = "crypticteklabs",
 //the name of the url paramater you are expecting that holds the code you wish to capture
 //for example, http://www.test.com?couponCode=BIGDISCOUNT your URL Parameter would be couponCode and the
 //cookie value that will be stored is BIGDISCOUNT
-URLParameterName = "MyParameterName",
+URLParameterName = "agent",
 //how many days you want the cookie to be valid for on the users machine
-cookiePersistDays = 14,
+cookiePersistDays = 30,
 cookiePath = '',    // use '' for default
 cookieDomain = "."+window.location.hostname, // leading . will allow subdomains to also access cookie
 cookieSecure = true;
